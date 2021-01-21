@@ -1,0 +1,193 @@
+
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>후라이팬 가격 비교</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <style>
+            .center {
+                text-align: center;
+            }
+
+            .commerce-list {
+                width: 500px;
+                margin: 20px auto 0 auto;
+            }
+
+            .averageprice {
+                display: inline-block;
+            }
+
+            .averageprice:hover {
+                text-decoration: underline;
+            }
+
+            .card {
+                margin-bottom: 15px;
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                // index.html 로드가 완료되면 자동으로 showCommerce() 함수를 호출합니다.
+                showCommerce();
+            });
+
+            function showCommerce() {
+                // 1. #market_box의 내부 html 태그를 모두 삭제합니다.
+                $('#market-box').empty()
+
+                // 2. 서버에 1) GET 방식으로, 2) /api/list 라는 주소로 market_list를 요청합니다.
+                $.ajax({
+                    type: "GET",
+                    url: "/api/list",
+                    data: {},
+                    success: function (response) {
+                        // 3. 서버가 돌려준 market_list를 market라는 변수에 저장합니다.
+                        let average = response['market_list']
+                        // 4. for 문을 활용하여 market 배열의 요소를 차례대로 조회합니다.
+                        for (let i = 0; i < market.length; i++) {
+                            let market = markets[i]
+                            // 5. market[i] 요소의 average, max, min 키 값을 활용하여 값을 조회합니다.
+                            let average = market['average']
+                            let max = market['max']
+                            let min = market['min']
+
+
+                            // 6. 영화인 카드를 만듭니다.
+                            let tempHtml = `<div class="card">
+                                <div class="card-content">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      <figure class="image is-48x48">
+                                        <img
+                                          src="${imgUrl}"
+                                          alt="Placeholder image"
+                                        />
+                                      </figure>
+                                    </div>
+                                    <div class="media-content">
+                                      <a href="${url}" target="_blank" class="averageprice title is-4">${averageprice} </a>
+                                      <p class="subtitle is-6">${max},${min}</p>
+
+                            // 7. #market-box에 temp_html을 붙입니다.
+                            $('market-box').append(tempHtml)
+                        }
+                    }
+                });
+            }
+
+
+        </script>
+
+    </head>
+    <body>
+        <section class="hero is-warning">
+            <div class="hero-body">
+                <div class="container center">
+                    <h1 class="title">
+                        후라이팬 어디가 저렴할까~
+                    </h1>
+                    <h2 class="subtitle">
+                        인기 상품 가격 비교를 해보아요!
+                    </h2>
+                </div>
+            </div>
+        </section>
+        <div class="commerce-list" id="market-box">
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="https://mblogthumb-phinf.pstatic.net/20160902_299/ppanppane_14728000319347pC1i_PNG/%C1%F6%B8%B6%C4%CF_%B7%CE%B0%ED_%282%29.png?type=w800"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="#" target="_blank" class="averageprice title is-4">평균 가격:**원</a>
+                            <p class="subtitle is-6">최저 가격: **원, 최고 가격: **원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="https://mblogthumb-phinf.pstatic.net/20160902_124/ppanppane_14728003076370owh6_PNG/%C4%ED%C6%CE%B7%CE%B0%ED_%281%29.png?type=w800"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="#" target="_blank" class="averageprice title is-4">평균 가격:**원</a>
+                            <p class="subtitle is-6">최저 가격: **원, 최고 가격: **원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="http://www.bloter.net/wp-content/uploads/2019/09/190904_pr-11st-1st-logo-600x257.jpg"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="#" target="_blank" class="averageprice title is-4">평균 가격:**원</a>
+                            <p class="subtitle is-6">최저 가격: **원, 최고 가격: **원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="https://static.wixstatic.com/media/fb022d_8371f8b7c6434acf971333b8fae83626~mv2.png/v1/fill/w_720,h_406,al_c,lg_1,q_85/fb022d_8371f8b7c6434acf971333b8fae83626~mv2.webp"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="#" target="_blank" class="averageprice title is-4">평균 가격:**원</a>
+                            <p class="subtitle is-6">최저 가격: **원, 최고 가격: **원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img
+                                        src="https://static.wixstatic.com/media/fb022d_e505db225f3a4cfaa365a12e7351de4e~mv2.png/v1/fill/w_651,h_651,al_c,q_90,usm_0.66_1.00_0.01/fb022d_e505db225f3a4cfaa365a12e7351de4e~mv2.webp"
+                                        alt="Placeholder image"
+                                />
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <a href="#" target="_blank" class="averageprice title is-4">평균 가격:**원</a>
+                            <p class="subtitle is-6">최저 가격: **원, 최고 가격: **원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+```>
