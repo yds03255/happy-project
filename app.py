@@ -14,7 +14,7 @@ def home():
 @app.route('/api/list', methods=['GET'])
 def show_average():
 
-    averages = list(db.price.find({},{'_id': False}).sort({'average': -1}))
+    averages = list(db.price.find({},{'_id': False}).sort('average', -1))
     return jsonify({'average_list': averages})
 
 

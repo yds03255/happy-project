@@ -21,7 +21,7 @@ for pan in pans:
     a_tag = pan.select_one("div.box__information > div.box__information-major")
     if a_tag is not None:
         name = pan.select_one("div.box__item-title > span > a > span.text__item").text
-        price = pan.select_one("div.box__item-price > div.box__price-seller").text.replace('할인적용금액', '')
+        price = pan.select_one("div.box__item-price > div.box__price-seller > strong.text__value").text.replace(',','')
         price = int(price)
         try:
             brand = pan.select_one("div.box__item-title > span > a > span.text__brand").text
